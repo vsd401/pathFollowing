@@ -38,8 +38,8 @@ function [x,y,psi,v] = transformProj2Orig(si,ni,alpha,v,filename)
     [sref,xref,yref,psiref,~]=getTrack(filename);
 %     tracklength=sref(end);
     %si=tracklength;
-    idxmindist=findClosestS(si,sref);
-    idxmindist2=findSecondClosestS(si,sref,idxmindist);
+    idxmindist=findClosestS(mod(si,sref(end)),sref);
+    idxmindist2=findSecondClosestS(mod(si,sref(end)),sref,idxmindist);
     t=(mod(si,sref(end))-sref(idxmindist))./(sref(idxmindist2)-sref(idxmindist));
     for i = length(t):-1:1
         if abs(t(i)) > 3
